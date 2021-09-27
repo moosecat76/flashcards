@@ -1,21 +1,30 @@
 # Flashcard
-from random import random
 
 
 class FlashCard:
-
 
     def __init__(self):
         self.flashcards = {
             "terms": ['purchase', "cos'(x)"],
             "definitions": ['buy', '-sin(x)']
         }
-        self.main()
+        self.user_definition = ''
 
     def main(self):
-        # Main
-        card = int(random() * len(self.flashcards['terms']))
-        print(f"Card:\n{self.flashcards['terms'][card]}\nDefinition:\n{self.flashcards['definitions'][card]}")
+        term = input()
+        definition = input()
+        self.user_definition = input()
+        if definition == self.user_definition:
+            print("Your answer is right!")
+        else:
+            print("Your answer is wrong...")
+
+    def show_term(self):
+        pass
+
+    def show_definition(self):
+        pass
 
 
 flashcards = FlashCard()
+flashcards.main()
