@@ -1,0 +1,6 @@
+setup.py
+src/Flashcards.egg-info/PKG-INFO
+src/Flashcards.egg-info/SOURCES.txt
+src/Flashcards.egg-info/dependency_links.txt
+src/Flashcards.egg-info/requires.txt
+src/Flashcards.egg-info/top_level.txt
