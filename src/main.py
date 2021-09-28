@@ -5,26 +5,39 @@ class FlashCard:
 
     def __init__(self):
         self.flashcards = {
-            "terms": ['purchase', "cos'(x)"],
-            "definitions": ['buy', '-sin(x)']
-        }
+            'cards': []  # {'term':t, 'definition': d}
+                        }
         self.user_definition = ''
+        self.n = 0
 
     def main(self):
-        term = input()
-        definition = input()
-        self.user_definition = input()
+        self.create_cards()
+        for n in range(self.n):
+            self.users_knowledge_test(n)
+
+    def create_cards(self):
+        self.n = int(input("Input the number of cards:\n"))
+        for n in range(self.n):
+            self.create_card(n)
+
+    def create_card(self, n):
+        term = input(f"The term for card #{n+1}:\n")
+        definition = input(f"The definition for card #{n+1}:\n")
+        card = {'term': term, 'definition': definition}
+        self.flashcards['cards'].append(card)
+        return
+
+    def users_knowledge_test(self, n):
+        term = self.flashcards['cards'][n]['term']
+        definition = self.flashcards['cards'][n]['definition']
+        self.user_definition = input(f"Print the definition of \"{term}\":\n")
         if definition == self.user_definition:
-            print("Your answer is right!")
+            print("Correct!")
         else:
-            print("Your answer is wrong...")
-
-    def show_term(self):
-        pass
-
-    def show_definition(self):
-        pass
+            print(f"Wrong. The right answer is \"{definition}\"")
+        return
 
 
-flashcards = FlashCard()
-flashcards.main()
+if __name__ == "__main__":
+    flashcards = FlashCard()
+    flashcards.main()
