@@ -36,4 +36,3 @@ def three_cards(card_valid1, card_valid2, card_valid3):
     return r
 
 
-
