@@ -1,5 +1,20 @@
 # Flashcard
 
+class TermExistError(Exception):
+    def __init__(self, term):
+        self.term = term
+
+    def __str__(self):
+        return f'The term "{self.term}" already exists. Try again:'
+
+
+class DefinitionExistError(Exception):
+    def __init__(self, definition):
+        self.definition = definition
+
+    def __str__(self):
+        return f'The term "{self.definition}" already exists. Try again:'
+
 
 class FlashCard:
 
@@ -10,7 +25,6 @@ class FlashCard:
         }
         self.user_definition = ''
         self.n = 0
-        return
 
     def main(self):
         self.create_cards()
@@ -25,42 +39,39 @@ class FlashCard:
     def create_card(self, n):
         self.define_term(n)
         self.define_definition(n)
-        return
 
     def define_term(self, n):
         valid_term = False
         term = input(f"The term for card #{n + 1}:\n")
         while valid_term is False:
-            if not self.check_term(term):
+            if self.check_term(term):
+                print(TermExistError(term))
+                term = input()
+            else:
                 self.flashcards['terms'].append(term)
                 valid_term = True
-            else:
-                term = input(f"The term \"{term}\" already exists. Try again:\n")
-        return
 
     def define_definition(self, n):
         valid_definition = False
         definition = input(f"The definition for card #{n + 1}:\n")
         while valid_definition is False:
-            if not self.check_definition(definition):
+            if self.check_definition(definition):
+                print(DefinitionExistError(definition))
+                definition = input()
+            else:
                 self.flashcards['definitions'].append(definition)
                 valid_definition = True
-            else:
-                definition = input(f"The definition \"{definition}\" already exists. Try again:\n")
-        return
 
     def users_knowledge_test(self, n):
         term = self.flashcards['terms'][n]
         definition = self.flashcards['definitions'][n]
         self.user_definition = input(f"Print the definition of \"{term}\":\n")
         if definition == self.user_definition:
-            print("Correct!")
-        elif self.check_definition(self.user_definition):
+            return print("Correct!")
+        if self.check_definition(self.user_definition):
             term = self.flashcards['terms'][self.flashcards['definitions'].index(self.user_definition)]
-            print(f"Wrong. The right answer is \"{definition}\", but your definition is correct for \"{term}\".")
-        else:
-            print(f"Wrong. The right answer is \"{definition}\"")
-        return
+            return print(f"Wrong. The right answer is \"{definition}\", but your definition is correct for \"{term}\".")
+        return print(f"Wrong. The right answer is \"{definition}\"")
 
     def check_term(self, term):
         return term in self.flashcards['terms']
