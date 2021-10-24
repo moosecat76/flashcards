@@ -36,3 +36,49 @@ def three_cards(card_valid1, card_valid2, card_valid3):
     return r
 
 
+@pytest.fixture
+def menu_add():
+    return ['add', 'term1', 'definition1', 'exit']
+
+
+@pytest.fixture
+def menu_remove():
+    return ['remove', '1', 'exit']
+
+
+@pytest.fixture
+def menu_import():
+    return ['import', 'cards.txt', 'exit']
+
+
+@pytest.fixture
+def menu_export():
+    return ['export', 'cards.txt', 'exit']
+
+
+@pytest.fixture
+def menu_ask():
+    return ['add', 'term2', 'definition2', 'ask', '1', 'term2', 'definition2', 'exit']
+
+
+@pytest.fixture
+def menu_exit():
+    return ['exit']
+
+@pytest.fixture
+def test_2():
+    add1 = ['add', 'cat', 'meow', 'add', 'cat', 'dog', 'meow', 'woof']
+    ask1 = ['ask', '2', 'meow', 'meow']
+    remove = ['remove', 'badger', 'remove', 'cat']
+    add2 = ['add', 'horse', 'neigh']
+    export = ['export', 'animal_sounds.txt']
+    load = ['import', 'animal_sounds.txt']
+    ask = ['ask', '4']
+    entries = []
+    for i in range(4):
+        q = f"question{i}"
+        a = "neigh"
+        entries.append(q)
+        entries.append(a)
+
+    return add1 + ask1 + remove + add2 + export + load + entries + ["exit"]
